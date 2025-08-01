@@ -73,7 +73,7 @@
 										<v-spacer></v-spacer>
 										<v-btn
 											color="medium-emphasis"
-											icon="mdi-heart"
+											:icon="appStore.isInFavorites(product) ? 'mdi-cards-heart' : 'mdi-cards-heart-outline'"
 											size="small"
 											@click="addItemToFavorites(product)"
 										></v-btn>
@@ -133,11 +133,15 @@ const clearFilters = () => {
 	selectedCategories.value = []
 }
 
-const cart = useAppStore()
+const appStore = useAppStore()
 
 function addItemToCart(item) {
 	if (!item) return
-	cart.addItem(item)
+	appStore.addItemToCart(item)
 }
 
+const addItemToFavorites = (item) => {
+	if (!item) return
+	appStore.toggleFavorite(item)
+}
 </script>
